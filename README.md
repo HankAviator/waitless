@@ -39,9 +39,10 @@ Some sites may also behave incorrectly if they depend on real-time timing for an
 ## Installation
 
 1. Install a userscript manager such as Greasemonkey or Tampermonkey.
-2. Create a new userscript.
-3. Paste in the contents of [`waitless.js`](/d:/gitproject/waitless/waitless.js).
-4. Save the script and reload the page you want to test.
+2. Open Greasy Fork at <https://greasyfork.org/>.
+3. Find the `Waitless` script and click its install button.
+4. Confirm the installation in your userscript manager.
+5. Reload the page you want to test.
 
 ## Verification
 

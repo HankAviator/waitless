@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Waitless
 // @namespace    han.universal.countdown.speeder
-// @version      1.0.0
+// @version      1.0.1
 // @description  Speeds up client-side countdown timers on download pages.
 // @author       HankAviator
 // @license      GPL-3.0-or-later

@@ -1,11 +1,21 @@
 // ==UserScript==
 // @name         Waitless
 // @namespace    han.universal.countdown.speeder
-// @version      1.0.1
+// @version      1.0.2
 // @description  Speeds up client-side countdown timers on download pages.
 // @author       HankAviator
 // @license      GPL-3.0-or-later
-// @match        *://*/*
+// @match        https://1fichier.com/*
+// @match        https://buzzheavier.com/*
+// @match        https://dailyuploads.net/*
+// @match        https://ddownload.com/*
+// @match        https://dosya.co/*
+// @match        https://gofile.io/*
+// @match        https://hexload.com/*
+// @match        https://megaup.net/*
+// @match        https://rapidgator.net/*
+// @match        https://usersdrive.com/*
+// @match        https://vikingfile.com/*
 // @run-at       document-start
 // @grant        unsafeWindow
 // ==/UserScript==

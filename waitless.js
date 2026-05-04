@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Universal Countdown Speeder
+// @name         Waitless
 // @namespace    han.universal.countdown.speeder
 // @version      1.0.0
 // @description  Speeds up client-side countdown timers on download pages.

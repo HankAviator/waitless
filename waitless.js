@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Waitless
 // @namespace    han.universal.countdown.speeder
-// @version      1.0.2
+// @version      1.0.3
 // @description  Speeds up client-side countdown timers on download pages.
 // @author       HankAviator
 // @license      GPL-3.0-or-later
@@ -32,34 +32,41 @@
 	const SPEED_FACTOR = 30;
 
 	/**
+	 * Leave short timers alone so animations and page polling do not turn into tight loops.
+	 * Most download countdowns use 500ms+ delays, so they still speed up as expected.
+	 */
+	const MIN_ACCELERATED_DELAY_MS = 500;
+
+	/**
 	 * Prevents extremely small timers from becoming 0ms and breaking pages.
 	 */
 	const MIN_TIMER_MS = 10;
 
 	const w = typeof unsafeWindow !== 'undefined' ? unsafeWindow : window;
+	const SPEED_DELTA = SPEED_FACTOR - 1;
 
 	const NativeDate = w.Date;
-	const nativeDateNow = NativeDate.now.bind(NativeDate);
+	const nativeDateNow = NativeDate.now;
 
 	const nativeSetTimeout = w.setTimeout.bind(w);
 	const nativeSetInterval = w.setInterval.bind(w);
 
 	const realStart = nativeDateNow();
-	const fakeStart = realStart;
 
 	function fakeNow() {
-		const realElapsed = nativeDateNow() - realStart;
-		return fakeStart + realElapsed * SPEED_FACTOR;
+		const now = nativeDateNow();
+		return now + (now - realStart) * SPEED_DELTA;
 	}
 
 	function scaleDelay(delay) {
 		const n = Number(delay);
 
-		if (!Number.isFinite(n) || n <= 0) {
+		if (!Number.isFinite(n) || n <= 0 || n < MIN_ACCELERATED_DELAY_MS) {
 			return delay;
 		}
 
-		return Math.max(MIN_TIMER_MS, n / SPEED_FACTOR);
+		const scaled = n / SPEED_FACTOR;
+		return scaled < MIN_TIMER_MS ? MIN_TIMER_MS : scaled;
 	}
 
 	// Hook setTimeout
@@ -104,8 +111,8 @@
 				configurable: true,
 				writable: true,
 				value: function () {
-					const realElapsed = nativePerformanceNow() - perfStart;
-					return perfStart + realElapsed * SPEED_FACTOR;
+					const now = nativePerformanceNow();
+					return now + (now - perfStart) * SPEED_DELTA;
 				}
 			});
 		} catch (e) {

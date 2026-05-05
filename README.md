@@ -1,8 +1,8 @@
-# waitless
+# Waitless
 
-`waitless` is a Greasemonkey/Tampermonkey userscript that speeds up JavaScript-driven countdowns on pages by making browser timers appear to move faster.
+`Waitless` is a Greasemonkey/Tampermonkey userscript that speeds up JavaScript-driven countdowns on supported download pages by making browser timers appear to move faster.
 
-It has no configuration panel and runs on all websites by default.
+It has no configuration panel and runs only on the hosts listed in the userscript header.
 
 ## What It Changes
 
@@ -12,12 +12,14 @@ The current script accelerates:
 - `setInterval`
 - `Date` and `Date.now()`
 - `performance.now()` when the page allows it to be overridden
+- only delays of `500ms` or more are accelerated, so short polling and animation timers stay at normal speed
 
-Default behavior in [`waitless.js`](/d:/gitproject/waitless/waitless.js):
+Default behavior in `waitless.js`:
 
 - Speed factor: `30x`
-- Minimum scheduled delay: `10ms`
-- Match pattern: `*://*/*`
+- Minimum accelerated delay: `500ms`
+- Minimum scheduled delay after scaling: `10ms`
+- Match patterns: the listed download hosts in the userscript header
 - Run timing: `document-start`
 
 ## What It Can Help With
